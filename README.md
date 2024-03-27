@@ -1,5 +1,7 @@
 # tesseract_wave
 
+Just use any .wav file you want, rename it to "2.wav" and put into the same folder as "tesseract_wave.py" then run the script.
+
 Rotation Controls:
 
     Rotate in the XY plane: Up and Down arrow keys.
