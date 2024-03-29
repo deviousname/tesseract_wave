@@ -1,5 +1,3 @@
-# initial code commit, still need to add a lot of doc string and make the other parts of the code into classes like the SignalProcessor, but it works bug free for now.
-
 import pygame
 import sys
 import numpy as np
@@ -67,15 +65,6 @@ def calculate_base_frequency(band):
     frequency = index_of_peak * processor.sample_rate / len(band)
     return frequency
 
-# Initialize Pygame
-pygame.init()
-
-# Screen setup
-infoObject = pygame.display.Info()
-
-# Screen dimensions
-width, height = (int(infoObject.current_w/1.0), int(infoObject.current_h/1.0))
-screen = pygame.display.set_mode((width, height))
 
 # Colors
 colors = [
@@ -193,6 +182,15 @@ def get_dynamic_color(time, base_color, i):
     return new_color
 
 def main():
+    # Initialize Pygame
+    pygame.init()
+
+    # Screen setup
+    infoObject = pygame.display.Info()
+
+    # Screen dimensions
+    width, height = (1920,1080)#(int(infoObject.current_w/1.0), int(infoObject.current_h/1.0))
+    screen = pygame.display.set_mode((width, height), pygame.RESIZABLE)
     clock = pygame.time.Clock()
     fov = 1000
     viewer_distance = 4
@@ -209,8 +207,17 @@ def main():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+                running = False
+            # Resize the window
+            elif event.type == pygame.VIDEORESIZE:
+                print(f'screen resized {event.w}x{event.h}')
+                width = event.w
+                height = event.h
+                center = (width//2, height//2)
+            # Toggle fullscreen or maximize on key press
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_f:  # Fullscreen toggle with "F" key
+                    pygame.display.toggle_fullscreen()
 
         screen.fill((0,0,0))
         keys = pygame.key.get_pressed()
@@ -272,6 +279,7 @@ def main():
         
         pygame.display.flip()
         clock.tick(60)
-
+    pygame.quit()
+    sys.exit()
 if __name__ == "__main__":
     main()
