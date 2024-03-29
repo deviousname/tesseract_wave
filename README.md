@@ -14,3 +14,7 @@ Rotation Controls:
 Auto-Rotate Toggle: 
 
     Press the Spacebar to toggle auto-rotation on or off.
+
+Fullscreen: 
+
+    Press f for fullscreen.
